@@ -3,23 +3,36 @@ pragma solidity >=0.5.0;
 
 library StringUtils {
 
+    function concat( string memory str, string memory title, string memory a) internal pure returns (string memory) {
+        return string(abi.encodePacked(str,title,a));
+    }
+
     function concat( string memory str, string memory a) internal pure returns (string memory) {
         return string(abi.encodePacked(str,a));
     }
 
+    function concat( string memory str, string memory title, address a) internal pure returns (string memory) {
+        return string(abi.encodePacked(str, title, toString(a)));
+    }
+
     function concat( string memory str, address a) internal pure returns (string memory) {
-        bytes memory b =abi.encodePacked(str, toString(a));
-        return string(b);
+        return string(abi.encodePacked(str, toString(a)));
+    }
+
+    function concat( string memory str, string memory title, uint a) internal pure returns (string memory) {
+        return string(abi.encodePacked(str, title, toString(a)));
     }
 
     function concat( string memory str, uint a) internal pure returns (string memory) {
-        bytes memory b =abi.encodePacked(str, toString(a));
-        return string(b);
+        return string(abi.encodePacked(str, toString(a)));
+    }
+
+    function concat( string memory str, string memory title, bytes32 a) internal pure returns (string memory) {
+        return string(abi.encodePacked(str, title, toString(a)));
     }
 
     function concat( string memory str, bytes32 a) internal pure returns (string memory) {
-        bytes memory b =abi.encodePacked(str, toString(a));
-        return string(b);
+        return string(abi.encodePacked(str, toString(a)));
     }
 
     function toString(address _addr) pure internal returns (string memory) {
