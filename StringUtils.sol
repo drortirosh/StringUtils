@@ -1,3 +1,4 @@
+// SPDX-License-Identifier:MIT
 pragma solidity >=0.5.0;
 
 library StringUtils {
@@ -12,6 +13,11 @@ library StringUtils {
     }
 
     function concat( string memory str, uint a) internal pure returns (string memory) {
+        bytes memory b =abi.encodePacked(str, toString(a));
+        return string(b);
+    }
+
+    function concat( string memory str, bytes32 a) internal pure returns (string memory) {
         bytes memory b =abi.encodePacked(str, toString(a));
         return string(b);
     }
