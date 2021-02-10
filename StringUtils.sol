@@ -23,7 +23,15 @@ library StringUtils {
         return string(abi.encodePacked(str, title, toString(a)));
     }
 
+    function concat( string memory str, string memory title, int a) internal pure returns (string memory) {
+        return string(abi.encodePacked(str, title, toString(a)));
+    }
+
     function concat( string memory str, uint a) internal pure returns (string memory) {
+        return string(abi.encodePacked(str, toString(a)));
+    }
+
+    function concat( string memory str, int a) internal pure returns (string memory) {
         return string(abi.encodePacked(str, toString(a)));
     }
 
@@ -56,6 +64,15 @@ library StringUtils {
             str[3+i*2] = alphabet[uint(uint8(chr & 0x0f))];
         }
         return string(str);
+    }
+
+    function toString(bool _i) internal pure returns (string memory _uintAsString) {
+        return _i ? "true" : "false";
+    }
+
+    function toString(int _i) internal pure returns (string memory _uintAsString) {
+        if (_i>0) return toString(uint(_i));
+        return concat("-", toString(uint(-_i)));
     }
 
     function toString(uint _i) internal pure returns (string memory _uintAsString) {
