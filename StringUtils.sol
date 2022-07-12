@@ -1,6 +1,9 @@
 // SPDX-License-Identifier:MIT
 pragma solidity >=0.5.0;
-
+/**
+ * add to your contract:
+ *  using StringUtils for *;
+ */
 library StringUtils {
 
     function concat( string memory str, string memory title, string memory a) internal pure returns (string memory) {
@@ -43,21 +46,21 @@ library StringUtils {
         return string(abi.encodePacked(str, toString(a)));
     }
 
-    function toString(address _addr) pure internal returns (string memory) {
+    function toString(address _addr) internal pure returns (string memory) {
         bytes32 value = bytes32(bytes20(uint160(_addr)));
         return toString(value, 20);
     }
 
-    function toString(bytes32 b) pure internal returns (string memory) {
+    function toString(bytes32 b) internal pure returns (string memory) {
         return toString(b, 32);
     }
 
-    function toString(bytes32 value, uint nbytes) pure internal returns(string memory) {
+    function toString(bytes32 value, uint nbytes) internal pure returns(string memory) {
         bytes memory alphabet = "0123456789abcdef";
 
         bytes memory str = new bytes(nbytes*2+2);
-        str[0] = '0';
-        str[1] = 'x';
+        str[0] = "0";
+        str[1] = "x";
         for (uint i = 0; i < nbytes; i++) {
             uint8 chr = uint8(value[i]);
             str[2+i*2] = alphabet[uint(uint8(chr >> 4))];
@@ -86,9 +89,9 @@ library StringUtils {
             j /= 10;
         }
         bytes memory bstr = new bytes(len);
-        uint k = len - 1;
+        uint k = len;
         while (_i != 0) {
-            bstr[k--] = byte(uint8(48 + _i % 10));
+            bstr[--k] = bytes1(uint8(48 + _i % 10));
             _i /= 10;
         }
         return string(bstr);
